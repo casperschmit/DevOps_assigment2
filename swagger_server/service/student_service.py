@@ -24,6 +24,8 @@ def add_student(student):
     res = student_db.search(query)
     if res:
         return 'already exists', 409
+    elif not student.first_name or not student.last_name:
+        return 'missing', 405
 
     doc_id = student_db.insert(student.to_dict())
     student.student_id = doc_id
@@ -38,6 +40,9 @@ def get_student_by_id(student_id, subject):
     if not subject:
         return student
 
+    if subject in student.grades:
+        return student
+
 
 def delete_student(student_id):
     student = student_db.get(doc_id=int(student_id))
@@ -46,5 +51,9 @@ def delete_student(student_id):
     student_db.remove(doc_ids=[int(student_id)])
     return student_id
 
+
 def get_student_by_lastname(last_name):
-    
+    query = Query()
+    res = student_db.search(query.last_name == last_name)
+    if res:
+        return res[0]
