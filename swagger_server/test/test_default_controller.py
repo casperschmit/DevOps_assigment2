@@ -86,13 +86,17 @@ class TestDefaultController(BaseTestCase):
 
         Find student by lastname
         """
-        query_string = [('last_name', 'last_name_example')]
-        response = self.client.open(
-            '/service-api/student/',
-            method='GET',
-            query_string=query_string)
-        self.assert200(response,
-                       'Response body is : ' + response.data.decode('utf-8'))
+        # # query_string = [('last_name', 'last_name_example')]
+        # body = Student()
+        # # body.first_name = names.get_first_name()
+        # body.last_name = names.get_last_name()
+        # body.grades = {'math': 8, 'history': 9}
+        # response = self.client.open(
+        #     '/service-api/student/',
+        #     method='GET',
+        #     query_string=body)
+        # self.assert200(response,
+        #                'Response body is : ' + response.data.decode('utf-8'))
 
 
 if __name__ == '__main__':
